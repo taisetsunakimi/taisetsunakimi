@@ -14,3 +14,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//= require bootstrap.min
+//= require bootstrap-datepicker
+//= require jquery.balloon.min
+//= require ie-emulation-modes-warning
+//= require ie10-viewport-bug-workaround
