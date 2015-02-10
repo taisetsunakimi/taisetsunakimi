@@ -1,0 +1,38 @@
+<%= form_for(@notice_config) do |f| %>
+  <% if @notice_config.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@notice_config.errors.count, "error") %> prohibited this notice_config from being saved:</h2>
+
+      <ul>
+      <% @notice_config.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :健診タイプ %><br>
+    <%= f.select :medical_type, [["修正6ヶ月", "修正6ヶ月"], ["1歳半", "1歳半"], ["暦3歳", "暦3歳"], ["5歳半", "5歳半"], ["9歳", "9歳"], ["13歳", "13歳"], ["16歳", "16歳"], ["19歳", "19歳"]] %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :通知時期 %><br>
+    <%= f.select :notice_config, [["健診1ヶ月前", "健診1ヶ月前"], ["健診3ヶ月前", "健診3ヶ月前"]] %>
+  </div>
+  <div class="field">
+    <%= f.label :件名 %><br>
+    <%= f.text_field :mail_subject, :size => "48" %>
+  </div>
+  <div>
+  <%= f.label :本文 %><br>
+  <%= f.text_area :mail_body, :size => "50x30" %>
+  </div>
+  
+  <%= f.check_box :testmail ,{}, true , false %>テストメールを送る
+
+  <div class="actions">
+    <%= f.submit( :作成 ) %>
+  </div>
+<% end %>
