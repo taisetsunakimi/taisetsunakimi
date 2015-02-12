@@ -12,10 +12,10 @@ class Parent
   field :remember_input, type: Mongoid::Boolean
 
   VALID_TEL_REGEX = /\d{2,4}-\d{2,4}-\d{4}/
-  validates :mailaddr, presence: true, length: { maximum: 50 }
+  validates :mailaddr, presence: true, length: { maximum: 50 }, uniqueness: { scope: :birthday }
   validates :birthday, presence: true
   validates :fetus_week, presence: true
   validates :fetus_day, presence: true
-  validates :tel_no, format: { with: VALID_TEL_REGEX } 
-  validates :birthweight, numericality: { only_integer: true }
+  validates :tel_no, format: { with: VALID_TEL_REGEX }, allow_blank: true
+  validates :birthweight, numericality: { only_integer: true }, allow_blank: true
 end
