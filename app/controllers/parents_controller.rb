@@ -6,7 +6,7 @@ class ParentsController < ApplicationController
     if @parent.birthday.nil?
       @parent.birthday = Date.today
     end
-    @question = Question.new(parent: @parent)
+    @question = Parentquestion.new(parent: @parent)
 
   end
   def create
@@ -53,7 +53,7 @@ class ParentsController < ApplicationController
       redirect_to :action => 'new'
 
     else
-      @question = Question.new(parent: @parent)
+      @question = Parentquestion.new(parent: @parent)
       p 'save できなかったよ'
       p @parent.errors.full_messages
       render :action => 'new'

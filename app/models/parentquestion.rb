@@ -1,4 +1,4 @@
-class Question
+class Parentquestion
   include Mongoid::Document
   include Mongoid::Timestamps
   belongs_to :parent

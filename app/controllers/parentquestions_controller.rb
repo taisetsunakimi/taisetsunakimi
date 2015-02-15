@@ -1,4 +1,4 @@
-class QuestionsController < ApplicationController
+class ParentquestionsController < ApplicationController
   def create
     # upsert(レコードがないときはinsert、ある時はupdate）できるように
     # ビジネスキーでfind_or_initialize_byする
@@ -15,7 +15,7 @@ class QuestionsController < ApplicationController
     @parent.fetus_day = parent_params[:fetus_day]
     @parent.birthweight = parent_params[:birthweight]
     @parent.remember_input = parent_params[:remember_input]
-    @question = Question.new(:question_txt => question_params[:question_txt], :register_reminder => question_params[:register_reminder])
+    @question = Parentquestion.new(:question_txt => question_params[:question_txt], :register_reminder => question_params[:register_reminder])
     @question.parent = @parent
     @parent.notice_flg = @question.register_reminder
     
@@ -62,11 +62,11 @@ class QuestionsController < ApplicationController
 
   private
     def parent_params
-      params.require(:question).permit(:mailaddr, :apple_no, :tel_no, :birthday,
+      params.require(:parentquestion).permit(:mailaddr, :apple_no, :tel_no, :birthday,
                                      :fetus_week, :fetus_day, :birthweight, :remember_input)
     end
 
     def question_params
-      params.require(:question).permit(:register_reminder, :question_txt)
+      params.require(:parentquestion).permit(:register_reminder, :question_txt)
     end
 end

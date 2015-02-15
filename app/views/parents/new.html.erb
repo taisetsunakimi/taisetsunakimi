@@ -79,8 +79,8 @@
                 <div class="form-group col-xs-12 col-md-4">
                   <%= f.label :fetus_week, '在胎週数（必須）' %>
                   <div class="form-inline"> 
-                    <%= f.select :fetus_week, [['22週',22],['23週',23]], {}, {:class => 'form-control'} %>
-                    <%= f.select :fetus_day, [['0日',0],['1日',0]], {}, {:class => 'form-control'} %>
+                    <%= f.select :fetus_week, @parent.fetus_week_choice, {}, {:class => 'form-control'} %>
+                    <%= f.select :fetus_day, @parent.fetus_day_choice, {}, {:class => 'form-control'} %>
                   </div>
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
@@ -134,8 +134,8 @@
                 <div class="form-group col-xs-12 col-md-4">
                   <%= f.label :fetus_week, '在胎週数（必須）' %>
                   <div class="form-inline"> 
-                    <%= f.select :fetus_week, [['22週',22],['23週',23]], {}, {:class => 'form-control'} %>
-                    <%= f.select :fetus_day, [['0日',0],['1日',0]], {}, {:class => 'form-control'} %>
+                    <%= f.select :fetus_week, @parent.fetus_week_choice, {}, {:class => 'form-control'} %>
+                    <%= f.select :fetus_day, @parent.fetus_day_choice, {}, {:class => 'form-control'} %>
                   </div>
                 </div>
                 <div class="form-group col-xs-12 col-md-4">
