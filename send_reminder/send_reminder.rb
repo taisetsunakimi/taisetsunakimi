@@ -12,8 +12,8 @@ require 'logger'
 
 # parents DB接続
 $con = Mongo::Connection.new
-parents_db = $con.db('niibe_development')
-coll_parents = parents_db["parents"]
+$mongo = $con.db('mongoid_dev')
+coll_parents = $mongo["parents"]
 
 # 通知タイミング/月
 $notice_config = 1
@@ -23,8 +23,7 @@ $today = Time.now.utc.to_date
 $from = "root@taisetsunakimi.net"
 $return_path = "guangchuan.h@gmail.com"
 # ログ出力
-$log = Logger.new("./log/senmail.log", 50, 10*1024*1024)
-
+$log = Logger.new("/var/share/taisetsunakimi/send_reminder/log/senmail.log", 50, 10*1024*1024)
 
 # 健診予定日の計算
 def set_medical_day(birthday, fetus_week, fetus_day)
@@ -55,8 +54,7 @@ def send_mail(ntype)
     $log.info ("MESSAGE DB接続、メールテンプレート取得開始")
   begin
     # メールテンプレート取得
-    notice_config_db = $con.db('scad_development')
-    coll_notice_config = notice_config_db["notice_configs"]
+    coll_notice_config = $mongo["notice_configs"]
     coll_notice_config.find({"medical_type" => "#{ntype}"}).each{ |row|
     $title = row["mail_subject"]
     $body = row["mail_body"]
@@ -113,8 +111,7 @@ end
 def insert_mail_history(to, subject, body, ntype)
     $log.info ("MESSAGE 配信履歴DB接続")
   begin
-    mail_history_db = $con.db('scad_development')
-    coll_mail_history_db = mail_history_db["mail_history"]
+    coll_mail_history_db = $mongo["mail_history"]
     # ドキュメント作成
     time = Time.new
     doc = {'date' => "#{time}", 'mailaddr' => "#{to}", 'notice_config' => "#{ntype}", 'subject' => "#{subject}", 'body' => "#{body}", 'bounce_info' => "0"}
@@ -129,18 +126,18 @@ def insert_mail_history(to, subject, body, ntype)
 end
 
 $log.info ("MESSAGE =============== 処理開始します。===============")
-# レコード取得
+# parentsレコード取得
 coll_parents.find.each{ |doc|
     $mail_to = doc["mailaddr"]
     birthday = doc["birthday"]
     fetus_week = doc["fetus_week"]
     fetus_day = doc["fetus_day"]
-    remember_input = doc["remember_input"]
+    notice_flg = doc["notice_flg"]
     $log.info ("MESSAGE =============== START ===============")
-    $log.info {"PARAM [メールアドレス =>#{$mail_to}] [誕生日 =>#{birthday}] [在胎週数 =>#{fetus_week}] [在胎日数 =>#{fetus_day}] [リマインダーチェック =>#{remember_input}]"}
+    $log.info {"PARAM [メールアドレス =>#{$mail_to}] [誕生日 =>#{birthday}] [在胎週数 =>#{fetus_week}] [在胎日数 =>#{fetus_day}] [リマインダーチェック =>#{notice_flg}]"}
 
     # リマインダー設定している場合のみ
-    if remember_input
+    if notice_flg
         # 健診予定日の設定
         set_medical_day(birthday, fetus_week, fetus_day)
         $log.info ("PARAM [修正6ヶ月健診予定日 =>#{$m0_5}] [修正1歳半歳健診予定日 =>#{$m1_5}] [3歳健診予定日 =>#{$m3}] [5歳半健診予定日 =>#{$m5_5}] [9歳健診予定日 =>#{$m9}] [13歳健診予定日 =>#{$m13}] [16歳健診予定日 =>#{$m16}]=========")
