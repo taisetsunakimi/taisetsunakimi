@@ -7,3 +7,4 @@ db/
 lib/
 log/
 send_reminder/log/*
+public/*
