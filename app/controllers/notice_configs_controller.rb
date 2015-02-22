@@ -19,6 +19,7 @@ class NoticeConfigsController < ApplicationController
         @hash = @notice_config
         chkbox = @hash["testmail"]
         if chkbox == "true"
+           # send mail
            title = @hash["mail_subject"]
            body = @hash["mail_body"]
            NoticeMail.sendmail(title, body).deliver
