@@ -4,10 +4,6 @@ class ParentsMailer < ActionMailer::Base
   def parentsmail(parm, question)
     @parm = parm
     to = @parm[:mailaddr]
-logger.debug("----------------------------------------------")
-logger.debug(@parm[:birthday])
-logger.debug("----------------------------------------------")
-
 
     if question
       @question = question
