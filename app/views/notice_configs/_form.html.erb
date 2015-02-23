@@ -18,18 +18,6 @@
 </p>
 
 <p>
-<!--
-  <strong>通知時期:</strong>
-  <%= @notice_config.notice_config %>
-</p>
-    <%= f.label :健診タイプ %><br>
-    <%= f.text_field :medical_type, :size => "48" %>
-<%= f.select :medical_type, [["修正6ヶ月", "修正6ヶ月"], ["修正1歳半", "修正1歳半"], ["3歳", "3歳"], ["5歳半", "5歳半"], ["9歳", "9歳"], ["13歳", "13歳"], ["16歳", "16歳"], ["19歳", "19歳"]] %>
-  </div>
-    <%= f.label :通知時期 %><br>
-    <%= f.select :notice_config, [["健診1ヶ月前", "健診1ヶ月前"], ["健診3ヶ月前", "健診3ヶ月前"]] %>
-  </div>
--->
   <div class="field">
     <%= f.label :件名 %><br>
     <%= f.text_field :mail_subject, :size => "48" %>
