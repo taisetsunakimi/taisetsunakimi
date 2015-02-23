@@ -31,6 +31,9 @@ class ParentsController < ApplicationController
 
     if @parent.save
       p 'save できたよ'
+      # メール送信
+      ParentsMailer.parentsmail(@parent, nil).deliver
+
       # 保存の成功をここで扱う。
       if @parent.remember_input
         cookies.permanent[:mailaddr] = { :value => @parent.mailaddr, :http_only => true}
