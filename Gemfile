@@ -41,3 +41,4 @@ gem "bson_ext", "~> 1.5"
 gem 'therubyracer'
 gem 'rb-readline'
 gem 'bootstrap_form'
+gem 'kaminari'
