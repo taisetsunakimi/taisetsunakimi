@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>配信日時:</strong>
+  <%= DateTime.parse(@mail_history.date).strftime("%Y/%m/%d %H:%M:%S") %>
+</p>
+
+<p>
+  <strong>健診タイプ:</strong>
+  <%= @mail_history.notice_config %>
+</p>
+
+<p>
+  <strong>メールアドレス:</strong>
+  <%= @mail_history.mailaddr %>
+</p>
+
+<p>
+  <strong>件名:</strong>
+  <%= @mail_history.subject %>
+</p>
+
+<p>
+  <strong>本文:</strong>
+  <%= @mail_history.body %>
+</p>
+
+<%= link_to '戻る', mail_histories_path %>

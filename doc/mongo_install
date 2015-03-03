@@ -1,0 +1,44 @@
+mongodb 2.4.12 インストール手順
+(作成者:伊藤)
+
+1.mongodb取得用レポジトリファイルを作成
+
+# vi /etc/yum.repos.d/mongodb.repo
+
+■以下内容を記載
+--------------
+[mongodb]
+name=MongoDB Repository
+baseurl=http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/
+gpgcheck=0
+enabled=1
+--------------
+
+2. 最新版mongodbのインストール除外設定
+
+# vi /etc/yum.conf
+
+
+■以下内容を追記
+--------------
+exclude=mongodb-org,mongodb-org-server,mongodb-org-shell,mongodb-org-mongos,mongodb-org-tools
+--------------
+
+
+3.mongodb インストール
+
+# yum install mongo-10gen-2.4.12 mongo-10gen-server-2.4.12
+
+
+4.自動起動ON
+
+
+# chkconfig mongod on
+
+
+[補足]
+
+起動コマンド
+
+# /etc/init.d/mongod start
+# /etc/init.d/mongod stop

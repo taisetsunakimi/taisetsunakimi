@@ -111,7 +111,7 @@ end
 def insert_mail_history(to, subject, body, ntype)
     $log.info ("MESSAGE 配信履歴DB接続")
   begin
-    coll_mail_history_db = $mongo["mail_history"]
+    coll_mail_history_db = $mongo["mail_histories"]
     # ドキュメント作成
     time = Time.new
     doc = {'date' => "#{time}", 'mailaddr' => "#{to}", 'notice_config' => "#{ntype}", 'subject' => "#{subject}", 'body' => "#{body}", 'bounce_info' => "0"}
