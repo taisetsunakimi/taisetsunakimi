@@ -19,9 +19,8 @@ coll_parents = $mongo["parents"]
 $notice_config = 1
 ### 本日UTC
 $today = Time.now.utc.to_date
-# メールfrom
-$from = "root@taisetsunakimi.net"
-$return_path = "guangchuan.h@gmail.com"
+# メール 送信元等の設定。別ファイル
+require './mail_info.rb'
 # ログ出力
 $log = Logger.new("/var/share/taisetsunakimi/send_reminder/log/senmail.log", 50, 10*1024*1024)
 
@@ -83,11 +82,11 @@ def smail(from, to, subject, body, ntype)
     Mail.defaults do
         delivery_method :smtp, smtp_settings
     end
-
     $log.info ("MESSAGE メール組み立て開始")
     mail = Mail.new do
-	from "#{from}"
+	from "#{$from}"
 	to "#{to}"
+        bcc $bcc
         subject NKF.nkf('-Mj', subject)
         body "#{body}"
     end
