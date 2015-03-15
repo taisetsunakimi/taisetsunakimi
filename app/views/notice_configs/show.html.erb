@@ -1,25 +1,30 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="question-content">
+    <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>健診タイプ:</strong>
-  <%= @notice_config.medical_type %>
-</p>
+    <p>
+      <strong>健診タイプ:</strong>
+      <%= @notice_config.medical_type %>
+    </p>
 
-<p>
-<!--  <strong>通知時期:</strong>
-  <%= @notice_config.notice_config %>
-</p>
+<!--
+    <p>
+      <strong>通知時期:</strong>
+      <%= @notice_config.notice_config %>
+    </p>
 -->
-<p>
-  <strong>件名:</strong>
-  <%= @notice_config.mail_subject %>
-</p>
+    <p>
+      <strong>件名:</strong>
+      <%= @notice_config.mail_subject %>
+    </p>
 
-<p>
-  <strong>本文:</strong>
+    <p>
+      <strong>本文:</strong>
 
-<%= simple_format( @notice_config.mail_body ) %>
-</p>
+      <%= simple_format( @notice_config.mail_body ) %>
+    </p>
 
-<%= link_to '編集', edit_notice_config_path(@notice_config) %> |
-<%= link_to '戻る', notice_configs_path %>
+    <%= link_to '編集', edit_notice_config_path(@notice_config) %> |
+    <%= link_to '戻る', notice_configs_path %>
+  </div>
+</div>
