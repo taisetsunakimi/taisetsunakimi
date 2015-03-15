@@ -25,6 +25,12 @@ class ParentquestionsController < ApplicationController
       p @question
       if @question.save
         p 'question save できたよ'
+        # メール送信
+        # 質問者への送信
+        ParentsMailer.parentsmail(@parent, @question).deliver
+        # 先生に送信
+        QuestionMail.sendquestion(@parent, @question).deliver
+
         # 保存の成功をここで扱う。
         if @parent.remember_input
           cookies.permanent[:mailaddr] = { :value => @parent.mailaddr, :http_only => true}

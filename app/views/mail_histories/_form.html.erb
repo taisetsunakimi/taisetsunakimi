@@ -1,0 +1,41 @@
+<%= form_for(@mail_history) do |f| %>
+  <% if @mail_history.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mail_history.errors.count, "error") %> prohibited this mail_history from being saved:</h2>
+
+      <ul>
+      <% @mail_history.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :配信日時 %><br>
+    <%= f.date_field :date %>
+  </div>
+  <div class="field">
+    <%= f.label :健診種別 %><br>
+    <%= f.text_field :notice_config %>
+  </div>
+  <div class="field">
+    <%= f.label :メールアドレス %><br>
+    <%= f.text_field :mailaddr %>
+  </div>
+  <div class="field">
+    <%= f.label :件名 %><br>
+    <%= f.text_field :subject %>
+  </div>
+  <div class="field">
+    <%= f.label :本文 %><br>
+    <%= f.text_field :body %>
+  </div>
+  <div class="field">
+    <%= f.label :配信フラグ %><br>
+    <%= f.text_field :bounce_info %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

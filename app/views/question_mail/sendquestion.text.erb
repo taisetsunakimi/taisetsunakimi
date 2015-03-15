@@ -1,0 +1,22 @@
+健診リマインターシステムから質問を受け付けました。
+
+■入力内容：
+===============================================
+メールアドレス    ：<%= @parm[:mailaddr]%>
+アップル番号      ：<%= @parm[:apple_no]%>
+電話番号          ：<%= @parm[:tel_no]%>
+お子様の生年月日  ：<%= @parm[:birthday]%>
+在胎週数          ：<%= @parm[:fetus_week]%>週 <%= @parm[:fetus_day]%>日
+出生体重          ：<%= @parm[:birthweight]%> g
+<% if @question[:register_reminder] == true %>
+  <% reminder = "登録する" %>
+<% else %>
+  <% reminder = "登録なし" %>
+<% end %>
+健診リマインダ登録：<%= reminder %>
+質問内容          ：
+----- ここから -----
+<%= @question[:question_txt]%>
+----- ここまで -----
+================================================
+

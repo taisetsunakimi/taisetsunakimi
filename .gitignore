@@ -1,9 +1,8 @@
-tmp/
-Gemfile.lock
 bin/
 config.ru
-config/
+tmp/
+Gemfile.lock
 db/
 lib/
 log/
-send_reminder/log/
+send_reminder/log/*

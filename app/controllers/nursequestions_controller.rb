@@ -9,6 +9,12 @@ class NursequestionsController < ApplicationController
     p @question
     if @question.save
       p 'question save できたよ'
+      # メール送信
+      # 質問者に送信
+      NurseMailer.nuresmail(@question).deliver
+      # 先生に送信
+      NursequestionMailer.nursequestionmail(@question).deliver
+
       # 保存の成功をここで扱う。
       if @question.remember_input
         cookies.permanent[:n_mailaddr] = { :value => @question.mailaddr, :http_only => true}
