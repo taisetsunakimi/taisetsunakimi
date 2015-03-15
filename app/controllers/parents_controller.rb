@@ -27,7 +27,7 @@ class ParentsController < ApplicationController
     @parent.fetus_day = parent_params[:fetus_day]
     @parent.birthweight = parent_params[:birthweight]
     @parent.remember_input = parent_params[:remember_input]
-    @parent.notice_flg = true;
+    @parent.notice_flg = true
 
     if @parent.save
       # 保存の成功をここで扱う。
@@ -60,7 +60,13 @@ class ParentsController < ApplicationController
   def update
     create
   end
+  def optout
+    @parent = Parent.find(params[:id])
+    @parent.notice_flg = false
+    @parent.save
+    p @parent
 
+  end
   private
 
     def parent_params
