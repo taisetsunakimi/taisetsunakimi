@@ -30,7 +30,6 @@ class ParentsController < ApplicationController
     @parent.notice_flg = true;
 
     if @parent.save
-      p 'save できたよ'
       # 保存の成功をここで扱う。
       if @parent.remember_input
         cookies.permanent[:mailaddr] = { :value => @parent.mailaddr, :http_only => true}
@@ -54,8 +53,6 @@ class ParentsController < ApplicationController
 
     else
       @question = Parentquestion.new(parent: @parent)
-      p 'save できなかったよ'
-      p @parent.errors.full_messages
       render :action => 'new'
     end  
   end
