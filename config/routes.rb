@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
   root :to => 'parents#new'
+  get 'parents/optout/:id', to: 'parents#optout'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

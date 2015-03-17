@@ -27,7 +27,7 @@ class ParentsController < ApplicationController
     @parent.fetus_day = parent_params[:fetus_day]
     @parent.birthweight = parent_params[:birthweight]
     @parent.remember_input = parent_params[:remember_input]
-    @parent.notice_flg = true;
+    @parent.notice_flg = true
 
     if @parent.save
       p 'save できたよ'
@@ -57,8 +57,6 @@ class ParentsController < ApplicationController
 
     else
       @question = Parentquestion.new(parent: @parent)
-      p 'save できなかったよ'
-      p @parent.errors.full_messages
       render :action => 'new'
     end  
   end
@@ -66,7 +64,12 @@ class ParentsController < ApplicationController
   def update
     create
   end
+  def optout
+    @parent = Parent.find(params[:id])
+    @parent.notice_flg = false
+    @parent.save
 
+  end
   private
 
     def parent_params
