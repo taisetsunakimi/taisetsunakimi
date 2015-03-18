@@ -20,7 +20,7 @@ $notice_config = 1
 ### 本日UTC
 $today = Time.now.utc.to_date
 # メール 送信元等の設定。別ファイル
-require './mail_info.rb'
+require '/var/share/taisetsunakimi/send_reminder/mail_info.rb'
 # ログ出力
 $log = Logger.new("/var/share/taisetsunakimi/send_reminder/log/senmail.log", 50, 10*1024*1024)
 
@@ -62,9 +62,19 @@ def send_mail(ntype)
     $log.fatal("ERROR DBからテンプレート取得時例外が発生")
     $log.fatal(err)
   end
+
+# 配信停止機能の追加：メール本文にidsを追加
+  stop_msg = "
+■本メールは、「たいせつなきみお知らせ機能」から送信しています。
+配信の停止を希望される方は、下記のURLをクリックしてください。
+http://133.242.49.126/parents/optout/#{$ids}
+
+"
+    $body.concat("#{stop_msg}")
+
     # 引数チェック
     $log.info ("MESSAGE DB接続、メールテンプレート取得完了")
-  
+ 
     # mail呼び出し
     smail($from, $mail_to, $title, $body, "#{ntype}")
   
@@ -132,6 +142,7 @@ coll_parents.find.each{ |doc|
     fetus_week = doc["fetus_week"]
     fetus_day = doc["fetus_day"]
     notice_flg = doc["notice_flg"]
+    $ids = doc["_id"]
     $log.info ("MESSAGE =============== START ===============")
     $log.info {"PARAM [メールアドレス =>#{$mail_to}] [誕生日 =>#{birthday}] [在胎週数 =>#{fetus_week}] [在胎日数 =>#{fetus_day}] [リマインダーチェック =>#{notice_flg}]"}
 

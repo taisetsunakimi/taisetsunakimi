@@ -16,15 +16,14 @@ class NoticeConfigsController < ApplicationController
 
     respond_to do |format|
       if @notice_config.update(notice_config_params)
-        @hash = @notice_config
-        chkbox = @hash["testmail"]
+        chkbox = @notice_config[:testmail]
         if chkbox == "true"
            # send mail
-           title = @hash["mail_subject"]
-           body = @hash["mail_body"]
+           title = @notice_config[:mail_subject]
+           body = @notice_config[:mail_body]
            NoticeMail.sendmail(title, body).deliver
 
-           format.html { redirect_to @notice_config, notice: '更新し、テストメールを送りました。' }
+           format.html { redirect_to @notice_config, notice: '更新し、メールを送信しました。' }
            format.json { render :show, status: :ok, location: @notice_config }
         else
            format.html { redirect_to @notice_config, notice: '更新しました。' }
