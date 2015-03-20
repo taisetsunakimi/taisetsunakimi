@@ -63,21 +63,14 @@ def send_mail(ntype)
     $log.fatal(err)
   end
 
-# 配信停止機能の追加：メール本文にidsを追加
-  stop_msg = "
-■本メールは、「たいせつなきみお知らせ機能」から送信しています。
-配信の停止を希望される方は、下記のURLをクリックしてください。
-http://133.242.49.126/parents/optout/#{$ids}
-
-"
-    $body.concat("#{stop_msg}")
+# 配信停止機能の追加：メール本文にidを追加
+    $body.gsub!('<_ID>',"#{$ids}")
 
     # 引数チェック
     $log.info ("MESSAGE DB接続、メールテンプレート取得完了")
  
     # mail呼び出し
     smail($from, $mail_to, $title, $body, "#{ntype}")
-  
 end
 
 # リマインダー送信
