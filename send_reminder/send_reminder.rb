@@ -28,24 +28,33 @@ def set_medical_day(birthday, fetus_week, fetus_day)
     age3 = Date.parse(birthday.to_s) >> 36
 #    $log.info {"MESSAGE ----- 3歳になる日は[#{age3}] -----"}
     # 3歳未満
-    if $today > age3
-        #通知日は、出産予定日＋健診日-通知タイミング
-        yoteibi = Date.parse(birthday.to_s) + ((40 - fetus_week) * 7 + fetus_day )
-        $m0_5 = yoteibi + 6 - $notice_config
-        $m1_5 = yoteibi + 18 - $notice_config
-#        $log.info ("MESSAGE 3歳未満[誕生日 =>#{Date.parse(birthday.to_s)}] [出産予定日 =>#{yoteibi}]")
+    if $today < age3
+        #通知日は、出産予定日から計算した健診予定日の一ヵ月前
+        yoteibi = Date.parse(birthday.to_s) + ((40 - fetus_week) * 7 + ( 7 - fetus_day) )
+        $m0_5 = yoteibi >> ( 6 - $notice_config )
+        $m1_5 = yoteibi >> ( 18 - $notice_config )
+        $log.info ("MESSAGE 3歳未満[誕生日 =>#{Date.parse(birthday.to_s)}] [出産予定日 =>#{yoteibi}]")
+        $log.info ("PARAM ----- 3歳未満 -----
+[誕生日                =>#{Date.parse(birthday.to_s)}] [出産予定日 =>#{yoteibi}]
+[在胎週数              =>#{fetus_week}] [在胎日数 =>#{fetus_day}]
+[修正6ヶ月健診配信日   =>#{$m0_5}]
+[修正1歳半歳健診配信日 =>#{$m1_5}]")
     # 3歳以上
     else
-        # 通知日は、誕生日＋健診日-通知タイミング
+        # 通知日は、誕生日から計算した健診予定日の一ヵ月前
         $m3 = Date.parse(birthday.to_s) >> (12 * 3 - $notice_config)
         $m5_5 = Date.parse(birthday.to_s) >> (12 * 5.5 - $notice_config)
         $m9 = Date.parse(birthday.to_s) >> (12 * 9 - $notice_config)
         $m13 = Date.parse(birthday.to_s) >> (12 * 13 - $notice_config)
         $m16 = Date.parse(birthday.to_s) >> (12 * 16 - $notice_config)
-#        $log.info ("MESSAGE 3歳以上[誕生日 =>#{Date.parse(birthday.to_s)}]")
+        $log.info ("PARAM ----- 3歳以上 -----
+[誕生日          =>#{Date.parse(birthday.to_s)}]
+[3歳健診配信日   =>#{$m3}]
+[5歳半健診配信日 =>#{$m5_5}]
+[9歳健診配信日   =>#{$m9}]
+[13歳健診配信日  =>#{$m13}]
+[16歳健診配信日  =>#{$m16}]")
     end
-#    $log.info ("MESSAGE ----- 健診予定日 -----")
-    $log.info ("PARAM \n[修正6ヶ月健診予定日 =>#{$m0_5}] \n[修正1歳半歳健診予定日 =>#{$m1_5}] \n[3歳健診予定日 =>#{$m3}] \n[5歳半健診予定日 =>#{$m5_5}] \n[9歳健診予定日 =>#{$m9}] \n[13歳健診予定日 =>#{$m13}] \n[16歳健診予定日 =>#{$m16}]")
 end
 
 ### リマインダー用テンプレート取得 ###
@@ -126,7 +135,7 @@ def main()
     
         # リマインダーチェックありの場合
         if notice_flg
-        $log.info {"param [メールアドレス:#{$mail_to}] [誕生日:#{birthday}] [在胎週数:#{fetus_week}] [在胎日数:#{fetus_day}] "}
+        $log.info {"PARAM [メールアドレス:#{$mail_to}] [誕生日:#{birthday}] [在胎週数:#{fetus_week}] [在胎日数:#{fetus_day}] "}
         # 健診予定日の設定
         set_medical_day(birthday, fetus_week, fetus_day)
             # 対象にはメール送信
