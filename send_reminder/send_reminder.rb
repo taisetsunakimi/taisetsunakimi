@@ -28,7 +28,7 @@ def set_medical_day(birthday, fetus_week, fetus_day)
     age3 = Date.parse(birthday.to_s) >> 36
 #    $log.info {"MESSAGE ----- 3歳になる日は[#{age3}] -----"}
     # 3歳未満
-    if $today < age3
+    if ( $today >> $notice_config ) < age3
         #通知日は、出産予定日から計算した健診予定日の一ヵ月前
         yoteibi = Date.parse(birthday.to_s) + ((40 - fetus_week) * 7 + ( 7 - fetus_day) )
         $m0_5 = yoteibi >> ( 6 - $notice_config )
