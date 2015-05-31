@@ -27,7 +27,7 @@
   <%= f.text_area :mail_body, :size => "50x30" %>
   </div>
   
-  <%= f.check_box :testmail ,{}, true , false %>テストメールを送る
+  <%= f.check_box :testmail ,{} , checked_value = "true" , unchecked_value = "false" %>テストメールを送る
 
   <div class="actions">
     <%= f.submit( :作成 ) %>
