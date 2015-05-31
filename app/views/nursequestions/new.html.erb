@@ -1,18 +1,18 @@
-    <% if @question.errors.any? %>
-      <div id="error_explanation">
-        <h2>
-          入力項目にエラーが見つかりました 
-          <%= pluralize(@question.errors.count, "error") %> 
-        </h2>
-        <ul>
-          <% @question.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
     <div class="container">
       <div class="question-content">
+      <% if @question.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            入力項目にエラーが見つかりました 
+            <%= pluralize(@question.errors.count, "error") %> 
+          </h2>
+          <ul>
+            <% @question.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>
       <% end %>
