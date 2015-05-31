@@ -1,0 +1,36 @@
+    <% if @parent.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          入力項目にエラーが見つかりました 
+          <%= pluralize(@parent.errors.count, "error") %> 
+        </h2>
+        <ul>
+          <% @parent.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <% if @parent.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          入力項目にエラーが見つかりました 
+          <%= pluralize(@parent.errors.count, "error") %> 
+        </h2>
+        <ul>
+          <% @parent.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="container">
+      <div class="question-content">
+        <div class="row">
+          <p>ご指定のメールアドレスへのお知らせ機能を解除しました。</p>
+            メールアドレス：<%= @parent.mailaddr %> <br>
+            生年月日：<%= @parent.birthday %> <br>
+        </div>
+      </div>
+    </div>
+    <!-- /.container -->
