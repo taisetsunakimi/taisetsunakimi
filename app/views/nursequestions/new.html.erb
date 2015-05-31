@@ -22,11 +22,11 @@
           </p>
           <%= form_for(@question) do |f| %>
             <div class="form-group col-xs-12 col-md-4">
-              <%= f.label :belong,'所属' %>
+              <%= f.label :belong,'所属（必須）' %>
               <%= f.text_field :belong, :class => 'form-control',:placeholder => '所属の施設名を入力してください' %>
             </div>
             <div class="form-group col-xs-12 col-md-4">
-              <%= f.label :name,'お名前' %>
+              <%= f.label :name,'お名前（必須）' %>
               <%= f.text_field :name, :class => 'form-control',:placeholder => 'お名前を入力してください' %>
 
             </div>
