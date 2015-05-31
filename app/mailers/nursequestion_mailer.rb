@@ -1,6 +1,6 @@
 class NursequestionMailer < ActionMailer::Base
-  default from: "root@taisetsunakimi.net",
-            to: "guangchuan.h@gmail.com"
+  default from: "scad@scad.taisetsunakimi.net",
+            to: "thiroma@wf7.so-net.ne.jp"
   def nursequestionmail(question)
     @question = question
     title = "保健師・助産師から質問を受け付けました。"

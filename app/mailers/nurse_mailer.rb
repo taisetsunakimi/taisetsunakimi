@@ -1,5 +1,5 @@
 class NurseMailer < ActionMailer::Base
-  default from: "root@taisetsunakimi.net"
+  default from: "scad@scad.taisetsunakimi.net"
 
   def nuresmail(question)
     @question = question

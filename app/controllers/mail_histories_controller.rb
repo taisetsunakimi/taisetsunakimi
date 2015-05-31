@@ -1,7 +1,6 @@
 class MailHistoriesController < ApplicationController
   before_action :set_mail_history, only: [:show]
   def index
- #   @mail_histories = MailHistory.all
     @mail_histories = MailHistory.page(params[:page])
   end
 

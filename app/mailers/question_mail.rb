@@ -1,6 +1,6 @@
 class QuestionMail < ActionMailer::Base
-  default from: "root@taisetsunakimi.net",
-     to: "guangchuan.h@gmail.com"
+  default from: "scad@scad.taisetsunakimi.net",
+     to: "thiroma@wf7.so-net.ne.jp"
 
   def sendquestion(parm, question)
     @parm = parm
