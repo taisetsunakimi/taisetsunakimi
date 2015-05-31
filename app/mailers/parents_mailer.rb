@@ -1,5 +1,5 @@
 class ParentsMailer < ActionMailer::Base
-  default from: "root@taisetsunakimi.net"
+  default from: "scad@scad.taisetsunakimi.net"
 
   def parentsmail(parm, question)
     @parm = parm

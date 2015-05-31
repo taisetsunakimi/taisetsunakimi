@@ -1,8 +1,8 @@
 <h3>配信履歴画面</h3>
 
-        <div align="right">
+<div align="right">
 <%= paginate(@mail_histories) %>
-        </div>
+</div>
 
 <table class="table table-striped table-bordered">
   <thead>
@@ -16,7 +16,7 @@
   </thead>
 
   <tbody>
-    <% @mail_histories.each do |mail_history| %>
+    <% @mail_histories.order('_id desc').each do |mail_history| %>
       <tr>
         <td><%= DateTime.parse(mail_history.date).strftime("%Y/%m/%d %H:%M:%S") %></td> 
         <td><%= mail_history.notice_config %></td>
