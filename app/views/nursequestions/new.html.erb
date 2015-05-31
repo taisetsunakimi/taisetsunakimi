@@ -1,18 +1,18 @@
-    <% if @question.errors.any? %>
-      <div id="error_explanation">
-        <h2>
-          入力項目にエラーが見つかりました 
-          <%= pluralize(@question.errors.count, "error") %> 
-        </h2>
-        <ul>
-          <% @question.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
     <div class="container">
       <div class="question-content">
+      <% if @question.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            入力項目にエラーが見つかりました 
+            <%= pluralize(@question.errors.count, "error") %> 
+          </h2>
+          <ul>
+            <% @question.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>
       <% end %>
@@ -22,11 +22,11 @@
           </p>
           <%= form_for(@question) do |f| %>
             <div class="form-group col-xs-12 col-md-4">
-              <%= f.label :belong,'所属' %>
+              <%= f.label :belong,'所属（必須）' %>
               <%= f.text_field :belong, :class => 'form-control',:placeholder => '所属の施設名を入力してください' %>
             </div>
             <div class="form-group col-xs-12 col-md-4">
-              <%= f.label :name,'お名前' %>
+              <%= f.label :name,'お名前（必須）' %>
               <%= f.text_field :name, :class => 'form-control',:placeholder => 'お名前を入力してください' %>
 
             </div>
